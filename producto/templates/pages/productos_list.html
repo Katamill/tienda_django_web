@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento</title>
+</head>
+<body>
+    <h1>Editar datos de productos</h1><br>
+    <br>
+
+    <button type="button">
+        <a href="{% url 'productosAdd' %}">Agregar</a>
+    </button>
+
+    <div id="idMensajes">
+        {% if mensaje %}
+            {{ mensaje }}
+        {% endif %}
+    </div>
+
+    <table>
+        {% if productos %}
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in productos %}
+                    <tr>
+                        <td>{{ x.nombre }}</td>
+                        <td>{{ x.descripcion }}</td>
+                        <td>{{ x.precio }}</td>
+                        <td><a href="{% url 'productos_del' pk=x.pk %}">Eliminar</a></td>
+                        <td><a href="{% url 'productos_findEdit' pk=x.pk %}">Modificar</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        {% endif %}
+    </table>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#idMensajes").delay(2000).fadeOut("slow");
+        });
+    </script>
+</body>
+</html>
